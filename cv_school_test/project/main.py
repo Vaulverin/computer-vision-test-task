@@ -28,15 +28,14 @@ def process_image(image_name, image, ann, index):
     cv2.imwrite(''.join([flip_dir, image_name, '_flip.png']), flipped_image)
 
     # Нормализуем картинку - доп. задание 3
-    norm_image = crop_img.copy()
-    cv2.normalize(crop_img, norm_image, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
+    norm_image = gray_image.copy()
+    cv2.normalize(gray_image, norm_image, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_64F)
     cv2.imwrite(''.join([norm_dir, image_name, '_norm.png']), norm_image)
 
     # Добавляем помехи - доп. задание 4
-    mean = 0.0  # some constant
-    std = 1.0  # some constant (standard deviation)
-    noisy_img = gray_image + np.random.normal(mean, std, gray_image.shape)
+    noisy_img = norm_image + np.random.normal(0, 0.05, norm_image.shape)
     noisy_img_clipped = np.clip(noisy_img, 0, 255)  # we might get out of bounds due to noise
+    # cv2.normalize(noisy_img_clipped, noisy_img_clipped, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_64F)
     cv2.imwrite(''.join([noise_dir, image_name, '_noise.png']), noisy_img_clipped)
 
 # Разбираем текстовые файлы с частями картинок
