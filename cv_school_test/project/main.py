@@ -38,6 +38,7 @@ def process_image(image_name, image, ann, index):
     # cv2.normalize(noisy_img_clipped, noisy_img_clipped, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_64F)
     cv2.imwrite(''.join([noise_dir, image_name, '_noise.png']), noisy_img_clipped)
 
+
 # Разбираем текстовые файлы с частями картинок
 for f in listdir(annotations_dir):
     file_path = join(annotations_dir, f)

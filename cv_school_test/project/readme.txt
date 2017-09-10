@@ -1,0 +1,1 @@
+Используется python 3.5 < и пакет opencv для python.
